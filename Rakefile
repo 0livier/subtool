@@ -10,6 +10,8 @@ spec = eval(File.read('subtool.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
 end
 
+Dir.mkdir 'tmp' unless Dir.exists?("tmp")
+
 CUKE_RESULTS = 'tmp/results.html'
 
 CLEAN << CUKE_RESULTS
