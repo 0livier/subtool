@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/0livier/subtool.png)](https://travis-ci.org/0livier/subtool) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/0livier/subtool) [![Gem Version](https://badge.fury.io/rb/subtool.png)](http://badge.fury.io/rb/subtool)
+
 subtool is a commandline tool that help fix the timing of subtitles files.
 
 ## Installation
