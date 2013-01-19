@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without development
+script: 'bundle exec rake features'
 rvm:
   - 1.9.3
   - 1.9.2
