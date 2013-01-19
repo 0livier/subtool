@@ -1,6 +1,8 @@
-require 'simplecov'
-SimpleCov.start
-SimpleCov.coverage_dir 'coverage/cucumber'
+if RUBY_VERSION != '1.8.7'
+  require 'simplecov'
+  SimpleCov.start
+  SimpleCov.coverage_dir 'coverage/cucumber'
+end
 
 require 'aruba/cucumber'
 
