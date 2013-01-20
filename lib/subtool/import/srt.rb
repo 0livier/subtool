@@ -2,6 +2,10 @@ module Subtool
   module Import
     class Srt
 
+      HOUR = 60 * 60 * 1000
+      MIN = 60 * 1000
+      SEC = 1000
+
       def self.filehandler(fh)
         subtitles = []
 
@@ -28,11 +32,18 @@ module Subtool
       def self.parse_position(position)
         matches = position.match(/^(\d\d):(\d\d):(\d\d),(\d\d\d) --> (\d\d):(\d\d):(\d\d),(\d\d\d)$/)
         throw Exception.new("Can't parse #{position} as a valid time range") unless matches
+
         matches = matches[1..8].map { |s| Integer(s) }
         {
-            :start => matches[0]*60*60*1000 + matches[1]*60*1000 + matches[2]*1000 + matches[3],
-            :end => matches[4]*60*60*1000 + matches[5]*60*1000 + matches[6]*1000 + matches[7]
+            :start => self.to_millisecs(matches[0], matches[1], matches[2], matches[3]),
+            :end => self.to_millisecs(matches[4], matches[5], matches[6], matches[7]),
         }
+      end
+
+      private
+
+      def self.to_millisecs(hour, min, sec, millisec)
+        return hour * HOUR + min * MIN + sec * SEC + millisec
       end
 
     end
