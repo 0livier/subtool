@@ -3,6 +3,7 @@ require 'rubygems'
 require 'rubygems/package_task'
 require 'cucumber'
 require 'cucumber/rake/task'
+require 'metric_fu'
 
 spec = eval(File.read('subtool.gemspec'))
 
@@ -10,7 +11,7 @@ spec = eval(File.read('subtool.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
 end
 
-Dir.mkdir 'tmp' unless File.exists?("tmp")
+Dir.mkdir 'tmp' unless File.exists?('tmp')
 
 CUKE_RESULTS = 'tmp/results.html'
 
