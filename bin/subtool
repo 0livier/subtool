@@ -54,6 +54,8 @@ if ARGV.count == 0
   exit
 end
 
+# as jruby does not support ARGV/ARGF well (see code history)
+# we have to import
 if options.input
   subtitles = Subtool::Import::Srt.file(options.input)
 else
