@@ -14,6 +14,15 @@ Before do
   @puts = true
   @original_rubylib = ENV['RUBYLIB']
   ENV['RUBYLIB'] = LIB_DIR + File::PATH_SEPARATOR + ENV['RUBYLIB'].to_s
+
+  # Spawning processes in tests with jruby is slow, so we wait longer and we try to make it start faster
+  @aruba_timeout_seconds = RUBY_PLATFORM == 'java' ? 60 : 3
+  Aruba.configure do |config|
+    config.before_cmd do |cmd|
+      set_env('JRUBY_OPTS', "-X-C #{ENV['JRUBY_OPTS']}") # disable JIT since these processes are so short lived
+      set_env('JAVA_OPTS', "#{ENV['JAVA_OPTS']}")
+    end
+  end if RUBY_PLATFORM == 'java'
 end
 
 After do

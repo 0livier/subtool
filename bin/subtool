@@ -54,10 +54,13 @@ if ARGV.count == 0
   exit
 end
 
-commands = ARGV.dup
+if options.input
+  subtitles = Subtool::Import::Srt.file(options.input)
+else
+  subtitles = Subtool::Import::Srt.filehandler($stdin)
+end
 
-ARGV.replace([options.input]) if options.input
-subtitles = Subtool::Import::Srt.filehandler(ARGF)
+commands = ARGV.dup
 
 # @Todo more filters otherwise the loop won't make any sense
 while commands.count > 0
