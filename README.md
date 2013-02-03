@@ -18,7 +18,7 @@ Install it using the gem command:
 
 ## Want another tool ?
 
-There are several other tool to manipulate SRT files. Among them,
+There are several other tools to manipulate SRT files. Among them,
 
 * https://github.com/remram44/srt-shift
 * http://www.aegisub.org/
