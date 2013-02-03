@@ -24,7 +24,7 @@ option_parser = OptionParser.new do |opts|
   end
 
   opts.on('-o', '--output FILENAME',
-          'Ouput SRT filename. STDOUT by default or if - is given.') do |filename|
+          'Output SRT filename. STDOUT by default or if - is given.') do |filename|
     options.output = filename unless filename == '-'
   end
 
