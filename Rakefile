@@ -3,7 +3,6 @@ require 'rubygems'
 require 'rubygems/package_task'
 require 'cucumber'
 require 'cucumber/rake/task'
-require 'metric_fu'
 
 spec = eval(File.read('subtool.gemspec'))
 
