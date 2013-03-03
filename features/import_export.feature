@@ -4,13 +4,23 @@ Feature: Parser Import / Export should get and write content properly
   As a developer of subtool
   I want it to load and write them correctly
 
-  Scenario: Srt Loading
+  Scenario: Srt Loading #1
     When I parse a Srt file named "features/files/simple.srt"
     Then I should have the following subtitles:
       | id | start   | end     | body                                          |
       | 1  | 20000   | 24400   | Altocumulus clouds occur between six thousand |
       | 2  | 24600   | 27800   | and twenty thousand feet above ground level.  |
       | 3  | 3661100 | 7322200 | QUACK\n\\_o<                                  |
+
+  Scenario: Srt Loading #2
+    When I parse a Srt file named "features/files/simple2.srt"
+    And I export the subtitles to a file named "tmp/output_simple2.srt"
+    And I parse a Srt file named "tmp/output_simple2.srt"
+    Then I should have the following subtitles:
+      | id | start | end   | body                      |
+      | 1  | 1000  | 4074  | My wonderful SRT          |
+      | 2  | 52341 | 58341 | SHOULD BE NICE\nAnd clean |
+      | 3  | 63091 | 65881 | Nah?                      |
 
   Scenario: Writing file
     When I parse a Srt file named "features/files/simple.srt"

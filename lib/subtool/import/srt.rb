@@ -13,9 +13,12 @@ module Subtool
 
           number = Integer(fh.readline.strip)
           position = self.parse_position(fh.readline.strip)
-          body = fh.readline("\n\n").strip
+          body = ""
+          while (! fh.eof?) && ("" != (content = fh.readline.strip))
+            body = body + content + "\n"
+          end
 
-          subtitles.push(Subtool::Subtitle.new(number, position[:start], position[:end], body))
+          subtitles.push(Subtool::Subtitle.new(number, position[:start], position[:end], body.strip))
         end
 
         subtitles
@@ -33,7 +36,7 @@ module Subtool
         matches = position.match(/^(\d\d):(\d\d):(\d\d),(\d\d\d) --> (\d\d):(\d\d):(\d\d),(\d\d\d)$/)
         throw Exception.new("Can't parse #{position} as a valid time range") unless matches
 
-        matches = matches[1..8].map { |s| Integer(s) }
+        matches = matches[1..8].map { |s| Integer(s.sub(/^0/,'')) }
         {
             :start => self.to_millisecs(matches[0], matches[1], matches[2], matches[3]),
             :end => self.to_millisecs(matches[4], matches[5], matches[6], matches[7]),

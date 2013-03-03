@@ -53,3 +53,14 @@ Feature: Modifying Parser Import / Export should get and write content properly
       | 1  | 22100   | 26500   | Altocumulus clouds occur between six thousand |
       | 2  | 26700   | 29900   | and twenty thousand feet above ground level.  |
       | 3  | 3663200 | 7324300 | QUACK\n\\_o<                                  |
+
+  Scenario: Srt Loading #2
+    When I parse a Srt file named "features/files/simple2.srt"
+    And I add a delay of 2 seconds
+    And I export the subtitles to a file named "tmp/output_simple2.srt"
+    And I parse a Srt file named "tmp/output_simple2.srt"
+    Then I should have the following subtitles:
+      | id | start | end   | body                      |
+      | 1  | 3000  | 6074  | My wonderful SRT          |
+      | 2  | 54341 | 60341 | SHOULD BE NICE\nAnd clean |
+      | 3  | 65091 | 67881 | Nah?                      |
