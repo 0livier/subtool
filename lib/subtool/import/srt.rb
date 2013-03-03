@@ -8,7 +8,6 @@ module Subtool
 
       def self.filehandler(fh)
         subtitles = []
-
         until fh.eof? do
 
           number = Integer(fh.readline.strip)
@@ -36,7 +35,7 @@ module Subtool
         matches = position.match(/^(\d\d):(\d\d):(\d\d),(\d\d\d) --> (\d\d):(\d\d):(\d\d),(\d\d\d)$/)
         throw Exception.new("Can't parse #{position} as a valid time range") unless matches
 
-        matches = matches[1..8].map { |s| Integer(s.sub(/^0/,'')) }
+        matches = matches[1..8].map { |s| s.to_i }
         {
             :start => self.to_millisecs(matches[0], matches[1], matches[2], matches[3]),
             :end => self.to_millisecs(matches[4], matches[5], matches[6], matches[7]),
